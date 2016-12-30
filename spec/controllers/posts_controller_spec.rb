@@ -43,6 +43,15 @@ RSpec.describe PostsController, type: :controller do
         end
     end
     
+    
+    describe "GET#edit" do
+        it "render the edit template" do
+            post = FactoryGirl.create(:post)
+            get :edit, id: post.id
+            expect(response).to render_template :edit
+        end
+    end
+    
     describe "GET#show" do
         it "render the show template" do
             post = FactoryGirl.create(:post)

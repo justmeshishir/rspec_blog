@@ -93,4 +93,19 @@ RSpec.describe PostsController, type: :controller do
             expect(response).to render_template :show
         end
     end
+    
+    describe "DELETE#destroy" do
+        it "deletes the post" do
+            post = FactoryGirl.create(:post)
+            expect{
+            delete :destroy, id: post.id
+            }.to change(Post, :count ).by(-1)
+        end
+        
+        it "redirects to root path" do
+            post = FactoryGirl.create(:post)
+            delete :destroy, id: post.id
+            expect(response).to redirect_to root_path
+        end
+    end
 end
